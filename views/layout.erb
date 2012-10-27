@@ -19,7 +19,7 @@ body {
 <a href="/" class="ahref"><span class="brand" style="color: white;">MovieRecommender</span></a>
 <div>
 <ul class="nav pull-right">
-<li><a href="#">Placeholder</a></li>
+<li><a href="/signinform" class="ahref">Currently signed in as <%= @signed_in_user_name %>. Sign in as someone else</a></li>
 </ul>
 </div>
 </div>
@@ -36,4 +36,7 @@ body {
 </div>
 </body>
 </html>
+<script>
+  $(".ahref,button").click(function() {$("body").fadeTo(100, 0.9);});
+</script>
 

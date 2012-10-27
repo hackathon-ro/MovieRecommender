@@ -1,0 +1,6 @@
+<% @users.each do |u| %>
+<form action="/dosignin/<%= u.id %>" method="post" class="well">
+<button type="submit" class="btn btn-inverse btn-mini">Switch to <%= u.nickname %></button>
+</form>
+<% end %>
+
