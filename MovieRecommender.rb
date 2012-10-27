@@ -15,5 +15,6 @@ class Movie < ActiveRecord::Base
 end
 
 class Rating < ActiveRecord::Base
+  belongs_to :user
 end
 
