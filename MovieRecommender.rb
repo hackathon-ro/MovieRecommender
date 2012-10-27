@@ -21,3 +21,7 @@ class Rating < ActiveRecord::Base
   belongs_to :movie
 end
 
+get "/" do
+  erb :welcomepage
+end
+
