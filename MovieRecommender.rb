@@ -12,3 +12,6 @@ end
 class Movie < ActiveRecord::Base
 end
 
+class Rating < ActiveRecord::Base
+end
+
