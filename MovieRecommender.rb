@@ -6,3 +6,9 @@ configure do
   ActiveRecord::Base.establish_connection(options)
 end
 
+class User < ActiveRecord::Base
+end
+
+class Movie < ActiveRecord::Base
+end
+
