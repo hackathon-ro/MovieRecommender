@@ -22,6 +22,11 @@ class TestMovieModel < Test::Unit::TestCase
   def test_that_it_responds_to_users
     assert_respond_to( Movie.new, :users, failure_message = "It does not traverse the foreign key relationship." )
   end
+  def test_that_it_checks_for_presence_of_name
+    m = Movie.new
+    m.valid?
+    assert( m.errors.messages.has_key?(:name), failure_message = "It does not check for the presence of attribute name." )
+  end
 end
 
 class TestRatingModel < Test::Unit::TestCase
