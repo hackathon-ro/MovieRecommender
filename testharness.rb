@@ -17,5 +17,8 @@ class TestRatingModel < Test::Unit::TestCase
   def test_that_it_responds_to_user
     assert_respond_to( Rating.new, :user, failure_message = "It does not traverse the foreign key relationship." )
   end
+  def test_that_it_responds_to_movie
+    assert_respond_to( Rating.new, :movie, failure_message = "It does not traverse the foreign key relationship." )
+  end
 end
 
