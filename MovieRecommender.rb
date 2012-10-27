@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 end
 
 class Movie < ActiveRecord::Base
+  has_many :ratings
 end
 
 class Rating < ActiveRecord::Base
