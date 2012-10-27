@@ -7,6 +7,7 @@ configure do
 end
 
 class User < ActiveRecord::Base
+  has_many :ratings
 end
 
 class Movie < ActiveRecord::Base
