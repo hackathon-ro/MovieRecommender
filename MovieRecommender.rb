@@ -22,6 +22,7 @@ class Rating < ActiveRecord::Base
 end
 
 get "/" do
+  @movies = Movie.all
   erb :welcomepage
 end
 
