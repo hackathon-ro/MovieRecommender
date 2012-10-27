@@ -9,6 +9,7 @@ configure do
 end
 
 class User < ActiveRecord::Base
+  validates :nickname, :presence => true
   has_many :ratings
   has_many :movies, :through => :ratings
 end
