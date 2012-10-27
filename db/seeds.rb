@@ -22,3 +22,20 @@ movies.each do |m|
   Movie.create(m)
 end
 
+users = [
+  {:nickname => 'GuestUserAccount'},
+  {:nickname => 'AquaShark'},
+  {:nickname => 'EtherealCereal'},
+  {:nickname => 'ZborDeFluturi'},
+  {:nickname => 'Frodo'},
+  {:nickname => 'WeaponX'},
+  {:nickname => 'AgentSmith'},
+  {:nickname => 'WonderWoman'},
+  {:nickname => 'Haiducul'},
+  {:nickname => 'XenaWarriorPrincess'}
+]
+
+users.each do |u|
+  User.create(u)
+end
+
