@@ -1,0 +1,21 @@
+<% if @movies.empty? %>
+  <h2><strong>No ratings yet.</strong></h2>
+<% else %>
+  <h2><strong>Movies I have rated</strong></h2>
+<% end %>
+
+<br>
+
+<table class="table table-striped">
+<% @movies.each do |m| %>
+  <tr>
+    <td><a href="/movie/<%= m.id %>"><%= m.name %></a></td>
+    <td>
+    <% dots(m.rating).each do |dot| %>
+      <span><img src="http://dserban.github.com/images/<%= dot %>.png"></span>
+    <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+

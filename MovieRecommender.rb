@@ -82,6 +82,11 @@ get "/movie/:id" do
   erb :movie
 end
 
+get "/myratings" do
+  @movies = AugmentedMovie.find_all_by_user_id(@my_user_id)
+  erb :myratings
+end
+
 post "/dosignin/:id" do
   session[:signed_in_user_id] = params[:id].to_i
   redirect "/"
@@ -111,6 +116,6 @@ post "/doratemovie/:movieid" do
     @@notice = "Error: The rating could not be saved."
     redirect "/notification"
   end
-  redirect "/"
+  redirect "/myratings"
 end
 
