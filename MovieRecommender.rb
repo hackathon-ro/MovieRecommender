@@ -29,6 +29,9 @@ class Rating < ActiveRecord::Base
   belongs_to :movie
 end
 
+class AugmentedMovie < ActiveRecord::Base
+end
+
 helpers do
   def dots(rating)
     dots = []
