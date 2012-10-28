@@ -32,12 +32,16 @@ before do
 end
 
 get "/" do
-  @movies = Movie.all
   erb :welcomepage
 end
 
 get "/notification" do
   erb :notification
+end
+
+get "/allmovies" do
+  @movies = Movie.all
+  erb :allmovies
 end
 
 get "/signinform" do

@@ -1,0 +1,14 @@
+<h2>
+  <strong>All movies</strong>
+</h2>
+<br>
+<table class="table table-striped">
+<% @movies.each do |m| %>
+  <tr>
+    <td>
+      <a href="/movie/<%= m.id %>"><%= m.name %></a>
+    </td>
+  </tr>
+<% end %>
+</table>
+
