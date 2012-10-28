@@ -41,5 +41,10 @@ class TestRatingModel < Test::Unit::TestCase
     r.valid?
     assert( r.errors.messages.has_key?(:rating), failure_message = "It does not check for the presence of attribute rating." )
   end
+  def test_that_it_checks_for_presence_of_user_id
+    r = Rating.new
+    r.valid?
+    assert( r.errors.messages.has_key?(:user_id), failure_message = "It does not check for the presence of user_id." )
+  end
 end
 
