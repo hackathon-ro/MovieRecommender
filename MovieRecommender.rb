@@ -29,6 +29,16 @@ class Rating < ActiveRecord::Base
   belongs_to :movie
 end
 
+helpers do
+  def dots(rating)
+    dots = []
+    (1..5).each do |i|
+      dots << (rating >= i ? "y" : "n")
+    end
+    dots
+  end
+end
+
 before do
   session[:signed_in_user_id] ||= 1
   @signed_in_user_name = User.find_by_id(session[:signed_in_user_id]).nickname
@@ -64,6 +74,8 @@ get "/movie/:id" do
     @@notice = "Error: The movie has not been found."
     redirect "/notification"
   end
+  @r = @m.ratings.where(:user_id => @my_user_id).first
+  @r ||= Rating.new(:rating => 0)
   erb :movie
 end
 
@@ -81,5 +93,21 @@ post "/doaddmovie" do
     @@notice = "Error: The movie could not be saved."
     redirect "/notification"
   end
+end
+
+post "/doratemovie/:movieid" do
+  movie_id = params[:movieid].to_i
+  if not Movie.exists?(movie_id)
+    @@notice = "Error: The movie has not been found."
+    redirect "/notification"
+  end
+  rating = params[:rating].to_i
+  r = Rating.where(:user_id => @my_user_id, :movie_id => movie_id).first_or_initialize
+  r.rating = rating
+  if not r.save
+    @@notice = "Error: The rating could not be saved."
+    redirect "/notification"
+  end
+  redirect "/"
 end
 
