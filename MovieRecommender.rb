@@ -171,6 +171,10 @@ get "/recommendations" do
   erb :recommendations
 end
 
+get "/admin" do
+  erb :admin
+end
+
 post "/dosignin/:id" do
   session[:signed_in_user_id] = params[:id].to_i
   redirect "/"
@@ -201,5 +205,11 @@ post "/doratemovie/:movieid" do
     redirect "/notification"
   end
   redirect "/myratings"
+end
+
+post "/dogeneraterecommendations" do
+  Rating.generate_recommendations_from_ratings
+  @@notice = "The recommendations matrix has been successfully generated."
+  redirect "/notification"
 end
 
