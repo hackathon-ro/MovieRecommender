@@ -3,6 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :nickname
     end
+    add_index :users, :nickname
   end
 end
 
