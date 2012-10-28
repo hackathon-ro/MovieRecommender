@@ -20,7 +20,16 @@ class Movie < ActiveRecord::Base
   has_many :users, :through => :ratings
 
   def self.with_ratings_of_user(raw_id)
-    []
+    id = raw_id.to_i
+    query = "SELECT movies.*, myratings.rating " +
+              "FROM " +
+                "movies " +
+              "LEFT OUTER JOIN " +
+                "(SELECT movie_id, rating " +
+                   "FROM ratings " +
+                  "WHERE user_id = #{id}) AS myratings " +
+              "ON movies.id = myratings.movie_id"
+    find_by_sql(query)
   end
 end
 
