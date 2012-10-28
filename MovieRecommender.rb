@@ -36,13 +36,42 @@ get "/" do
   erb :welcomepage
 end
 
+get "/notification" do
+  erb :notification
+end
+
 get "/signinform" do
   @users = User.all
   erb :signinform
 end
 
+get "/addmovieform" do
+  erb :addmovieform
+end
+
+get "/movie/:id" do
+  movie_id = params[:id].to_i
+  @m = Movie.find_by_id(movie_id)
+  if @m.nil?
+    @@notice = "Error: The movie has not been found."
+    redirect "/notification"
+  end
+  erb :movie
+end
+
 post "/dosignin/:id" do
   session[:signed_in_user_id] = params[:id].to_i
   redirect "/"
+end
+
+post "/doaddmovie" do
+  name = params[:moviename].to_s
+  m = Movie.new(:name => name)
+  if m.save
+    redirect "/movie/#{m.id}"
+  else
+    @@notice = "Error: The movie could not be saved."
+    redirect "/notification"
+  end
 end
 
