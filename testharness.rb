@@ -51,5 +51,10 @@ class TestRatingModel < Test::Unit::TestCase
     r.valid?
     assert( r.errors.messages.has_key?(:movie_id), failure_message = "It does not check for the presence of movie_id." )
   end
+  def test_that_it_checks_that_the_rating_is_an_integer
+    r = Rating.new(:rating => 1.5)
+    r.valid?
+    assert( r.errors.messages.has_key?(:rating), failure_message = "It does not check that the rating is an integer." )
+  end
 end
 
