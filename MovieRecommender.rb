@@ -84,6 +84,28 @@ class Rating < ActiveRecord::Base
                                         :less_than_or_equal_to => 5 }
   belongs_to :user
   belongs_to :movie
+
+  def self.generate_recommendations_from_ratings
+    stmt = "DELETE FROM recommendations"
+    ActiveRecord::Base.connection.execute(stmt)
+    stmt = "INSERT INTO recommendations " +
+           "SELECT " +
+             "10 * input.movie_id + (input.rating IN (4,5)), " +
+             "output.movie_id, " +
+             "output.rating " +
+           "FROM " +
+             "ratings AS input, " +
+             "ratings AS output  " +
+           "WHERE " +
+             "input.user_id = output.user_id " +
+             "AND " +
+             "input.rating IN (1,2,4,5) " +
+             "AND " +
+             "output.rating IN (4,5) " +
+             "AND " +
+             "input.movie_id != output.movie_id"
+    ActiveRecord::Base.connection.execute(stmt)
+  end
 end
 
 class AugmentedMovie < ActiveRecord::Base
