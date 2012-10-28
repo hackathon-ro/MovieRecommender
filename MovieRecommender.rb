@@ -18,6 +18,9 @@ class Movie < ActiveRecord::Base
   validates :name, :presence => true
   has_many :ratings
   has_many :users, :through => :ratings
+
+  def self.with_ratings_of_user
+  end
 end
 
 class Rating < ActiveRecord::Base
