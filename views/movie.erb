@@ -1,21 +1,22 @@
 <h2>Movie details for <%= @m.name %></h2>
-
 <span>My rating:&nbsp;</span>
 <% dots(@r.rating).to_enum.with_index(1) do |dot,i| %>
   <span class="dot" id="<%= i %>"><img src="http://dserban.github.com/images/<%= dot %>.png"></span>
 <% end %>
-
 <br>
 <br>
-
 <form action="/doratemovie/<%= @m.id %>" method="post">
   <input type="hidden" name="rating" id="rating">
   <button type="submit" class="btn btn-inverse btn-mini">Submit rating</button>
 </form>
-
 <br>
 <br>
-
+<% if not @people_also_liked.empty? %>
+<strong>People who liked this movie also liked:</strong>
+  <% @people_also_liked.each do |recommended| %>
+    <div><a href="/movie/<%= recommended.output %>"><%= recommended.name %></a></div>
+  <% end %>
+<% end %>
 <script>
 function repaintDot(id,r)
 {

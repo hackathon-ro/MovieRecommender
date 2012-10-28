@@ -158,6 +158,7 @@ get "/movie/:id" do
   end
   @r = @m.ratings.where(:user_id => @my_user_id).first
   @r ||= Rating.new(:rating => 0)
+  @people_also_liked = Movie.recommend_for_movie(movie_id)
   erb :movie
 end
 
