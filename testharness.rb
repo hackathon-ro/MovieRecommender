@@ -27,6 +27,9 @@ class TestMovieModel < Test::Unit::TestCase
     m.valid?
     assert( m.errors.messages.has_key?(:name), failure_message = "It does not check for the presence of attribute name." )
   end
+  def test_that_it_responds_to_with_ratings_of_user
+    assert_respond_to( Movie, :with_ratings_of_user, failure_message = "It does not respond to with_ratings_of_user." )
+  end
 end
 
 class TestRatingModel < Test::Unit::TestCase
