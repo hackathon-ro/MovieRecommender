@@ -64,3 +64,5 @@ r = Rating.create(:user => u, :movie => Movie.find_by_name("Titanic"), :rating =
 r = Rating.create(:user => u, :movie => Movie.find_by_name("Casablanca"), :rating => 2)
 r = Rating.create(:user => u, :movie => Movie.find_by_name("L.A. Confidential"), :rating => 1)
 
+Rating.generate_recommendations_from_ratings
+
