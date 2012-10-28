@@ -3,6 +3,7 @@ class CreateMovies < ActiveRecord::Migration
     create_table :movies do |t|
       t.string :name
     end
+    add_index :movies, :name
   end
 end
 
