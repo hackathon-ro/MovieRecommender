@@ -31,6 +31,24 @@ class Movie < ActiveRecord::Base
               "ON movies.id = myratings.movie_id"
     find_by_sql(query)
   end
+
+  def self.recommend_for_movie(raw_id)
+    input = 10 * raw_id.to_i + 1
+    query = "SELECT " +
+              "output, " +
+              "(SELECT name FROM movies WHERE id = output) AS name, " +
+              "SUM(weight) AS sumweight " +
+            "FROM " +
+              "recommendations " +
+            "WHERE " +
+              "input = #{input} " +
+            "GROUP BY " +
+              "output " +
+            "ORDER BY " +
+              "sumweight DESC " +
+            "LIMIT 5"
+    find_by_sql(query)
+  end
 end
 
 class Rating < ActiveRecord::Base
