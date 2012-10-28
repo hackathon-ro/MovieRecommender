@@ -49,6 +49,32 @@ class Movie < ActiveRecord::Base
             "LIMIT 5"
     find_by_sql(query)
   end
+
+  def self.recommend_for_user(raw_id)
+    uid = raw_id.to_i
+    query = "SELECT " +
+              "output, " +
+              "(SELECT name FROM movies WHERE id = output) AS name, " +
+              "SUM(weight) AS sumweight " +
+            "FROM " +
+              "recommendations " +
+            "WHERE " +
+              "input IN (SELECT " +
+                          "10 * movie_id + (rating IN (4,5)) " +
+                        "FROM " +
+                          "ratings " +
+                        "WHERE " +
+                          "user_id = #{uid} " +
+                          "AND " +
+                          "rating IN (1,2,4,5)) " +
+              "AND " +
+              "output NOT IN (SELECT movie_id FROM ratings WHERE user_id = #{uid}) " +
+            "GROUP BY " +
+              "output " +
+            "ORDER BY " +
+              "sumweight DESC"
+    find_by_sql(query)
+  end
 end
 
 class Rating < ActiveRecord::Base
