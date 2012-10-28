@@ -61,5 +61,10 @@ class TestRatingModel < Test::Unit::TestCase
     r.valid?
     assert( r.errors.messages.has_key?(:rating), failure_message = "It does not check that the rating is greater than or equal to 1." )
   end
+  def test_that_it_checks_that_the_rating_is_lteq_5
+    r = Rating.new(:rating => 6)
+    r.valid?
+    assert( r.errors.messages.has_key?(:rating), failure_message = "It does not check that the rating is less than or equal to 5." )
+  end
 end
 
