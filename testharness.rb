@@ -30,6 +30,20 @@ class TestMovieModel < Test::Unit::TestCase
   def test_that_it_responds_to_with_ratings_of_user
     assert_respond_to( Movie, :with_ratings_of_user, failure_message = "It does not respond to with_ratings_of_user." )
   end
+  def test_correct_behavior_of_with_ratings_of_user
+    u = User.create(:nickname => "uuu_user")
+    m1 = Movie.create(:name => "mmm_movie_1")
+    m2 = Movie.create(:name => "mmm_movie_2")
+    r = Rating.create(:user => u, :movie => m1, :rating => 5)
+    is_it_five = Movie.with_ratings_of_user(u.id).find { |m| m.id == m1.id }.rating == 5
+    is_it_nil = Movie.with_ratings_of_user(u.id).find { |m| m.id == m2.id }.rating.nil?
+    r.destroy
+    u.destroy
+    m1.destroy
+    m2.destroy
+    assert( is_it_five, failure_message = "It is not five as expected." )
+    assert( is_it_nil, failure_message = "It is not nil as expected." )
+  end
 end
 
 class TestRatingModel < Test::Unit::TestCase

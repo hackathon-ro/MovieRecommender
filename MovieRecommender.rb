@@ -19,7 +19,8 @@ class Movie < ActiveRecord::Base
   has_many :ratings
   has_many :users, :through => :ratings
 
-  def self.with_ratings_of_user
+  def self.with_ratings_of_user(raw_id)
+    []
   end
 end
 
