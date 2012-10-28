@@ -1,0 +1,11 @@
+<% if @you_might_like.empty? %>
+  <h2><strong>We do not have enough information to predict what movies you might like.<br>Please consider rating a few more movies.</strong></h2>
+<% else %>
+  <strong>We have matched your tastes with those of others.<br>We are confident that you are going to like the following movies:</strong>
+  <br>
+  <br>
+  <% @you_might_like.each do |recommended| %>
+    <div><a href="/movie/<%= recommended.output %>"><%= recommended.name %></a></div>
+  <% end %>
+<% end %>
+

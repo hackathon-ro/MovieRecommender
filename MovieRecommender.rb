@@ -166,6 +166,11 @@ get "/myratings" do
   erb :myratings
 end
 
+get "/recommendations" do
+  @you_might_like = Movie.recommend_for_user(@my_user_id)
+  erb :recommendations
+end
+
 post "/dosignin/:id" do
   session[:signed_in_user_id] = params[:id].to_i
   redirect "/"
