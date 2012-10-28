@@ -70,7 +70,7 @@ get "/notification" do
 end
 
 get "/allmovies" do
-  @movies = Movie.all
+  @movies = Movie.with_ratings_of_user(@my_user_id)
   erb :allmovies
 end
 

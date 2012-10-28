@@ -5,8 +5,17 @@
 <table class="table table-striped">
 <% @movies.each do |m| %>
   <tr>
+    <td><a href="/movie/<%= m.id %>"><%= m.name %></a></td>
     <td>
-      <a href="/movie/<%= m.id %>"><%= m.name %></a>
+    <% if m.rating.nil? %>
+      &nbsp;
+    <% else %>
+    <%   dots(m.rating).each do |dot| %>
+      <span>
+        <img src="http://dserban.github.com/images/<%= dot %>.png">
+      </span>
+    <%   end %>
+    <% end %>
     </td>
   </tr>
 <% end %>
